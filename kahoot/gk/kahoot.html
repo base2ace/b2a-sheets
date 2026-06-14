@@ -1,0 +1,198 @@
+
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Kahoot-style Quiz</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #C19A6B;
+                        color: #000;
+                        text-align: center;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                    }
+    
+                    .question {
+                        font-size: 34px;
+                        margin-bottom: 20px;
+                    }
+    
+                    .options {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-gap: 10px;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 20px;
+                    }
+    
+                    .option {
+                        padding: 20px 40px;
+                        background-color: #8B4513;
+                        color: #FFF;
+                        border: 2px solid #FFF;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+                        font-size: 20px;
+                        width: 250px;
+                    }
+    
+                    .option:hover {
+                        background-color: #66BB6A;
+                    }
+    
+                    .option.clicked {
+                        background-color: #FFEB3B;
+                    }
+    
+                    .disabled {
+                        pointer-events: none;
+                        opacity: 0.5;
+                    }
+    
+                    #timer {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        font-size: 36px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="quiz-container">
+                    <div class="question" id="question"></div>
+                    <div><p><br><br><br></p></div>
+                    <div class="options" id="options"></div>
+                    <div><p><br><br></p></div>
+                    <div class="question" id="result"></div>
+                </div>
+                <div id="timer">15</div>
+    
+                <audio id="correctSound" src="correct.mp3"></audio>
+                <audio id="wrongSound" src="wrong.mp3"></audio>
+    
+                <script>
+                    var questions = [
+    
+                            
+    {
+        question: "Choose the correct answer. <br><br>2",
+        answers: [
+            { option: "2", correct: true },
+            { option: "2", correct: false },
+            { option: "22", correct: false },
+            { option: "2", correct: false }
+        ]
+    },
+    
+                    ];
+    
+                    var currentQuestionIndex = 0;
+                    var answered = false;
+                    var timeLeft = 15;
+                    var totalScore = 0;
+                    var timerInterval;
+    
+                    // Load audio elements
+                    var correctSound = document.getElementById('correctSound');
+                    var wrongSound = document.getElementById('wrongSound');
+    
+                    function updateTimer() {
+                        var timerElement = document.getElementById("timer");
+                        timerElement.textContent = timeLeft;
+                        if (timeLeft === 0) {
+                            clearInterval(timerInterval);
+                            var buttons = document.querySelectorAll('.option');
+                            for (var i = 0; i < buttons.length; i++) {
+                                buttons[i].classList.add('disabled');
+                            }
+                            answered = true;
+                            setTimeout(nextQuestion, 3000); // Delay before loading the next question
+                        } else {
+                            timeLeft--;
+                        }
+                    }
+    
+                    function displayQuestion() {
+                        var question = questions[currentQuestionIndex];
+                        document.getElementById('question').innerHTML = question.question;  // Use innerHTML to render HTML tags
+                        var optionsDiv = document.getElementById('options');
+                        optionsDiv.innerHTML = '';
+                        question.answers.forEach(answer => {
+                            var button = document.createElement('button');
+                            button.textContent = answer.option;
+                            button.className = 'option';
+                            button.dataset.correct = answer.correct;
+                            button.addEventListener('click', function() {
+                                checkAnswer(this, button);
+                            });
+                            optionsDiv.appendChild(button);
+                        });
+                    }
+    
+                    function checkAnswer(selectedAnswer, button) {
+                        if (!answered) {
+                            var resultElement = document.getElementById("result");
+                            var buttons = document.querySelectorAll('.option');
+    
+                            answered = true;
+    
+                            for (var i = 0; i < buttons.length; i++) {
+                                buttons[i].classList.add('disabled');
+                            }
+    
+                            button.classList.add('clicked');
+    
+                            if (selectedAnswer.dataset.correct === 'true') {
+                                resultElement.textContent = "Correct Answer !";
+                                resultElement.style.color = "#4CAF50"; // Green color for correct answer
+                                correctSound.play(); // Play correct sound
+                                var score = calculateScore();
+                                totalScore += score;
+                                console.log("Score for question: " + score);
+                            } else {
+                                resultElement.textContent = "Oops ! Wrong Answer.";
+                                resultElement.style.color = "#8B0000"; // Red color for wrong answer
+                                wrongSound.play(); // Play wrong sound
+                            }
+    
+                            clearInterval(timerInterval); // Clear the timer
+                            setTimeout(nextQuestion, 3000); // Show next question after 3 seconds
+                        }
+                    }
+    
+                    function calculateScore() {
+                        var timeBonus = timeLeft * 10; // Each remaining second adds 10 points
+                        return timeBonus;
+                    }
+    
+                    function nextQuestion() {
+                        currentQuestionIndex++;
+                        if (currentQuestionIndex < questions.length) {
+                            answered = false;
+                            displayQuestion();
+                            timeLeft = 15;
+                            timerInterval = setInterval(updateTimer, 1000);
+                        } else {
+                            // All questions answered
+                            document.getElementById('question').textContent = "All questions answered!";
+                            document.getElementById('options').innerHTML = "";
+                            document.getElementById('timer').textContent = "";
+                            document.getElementById('result').textContent = "Total Score: " + totalScore;
+                        }
+                    }
+    
+                    displayQuestion();
+                    timerInterval = setInterval(updateTimer, 1000);
+                </script>
+            </body>
+            </html>
+                

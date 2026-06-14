@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base2ace Academy | Exam & Practice Sheets Portal</title>
+  <meta name="description" content="Access fully interactive Abacus, Mental Arithmetic, Vedic Maths, Multiplication, and Division practice and exam sheets from Base2ace Academy.">
+  <meta name="keywords" content="Base2ace Academy, Abacus, Vedic Maths, Practice Sheets, Exam Sheets, Mental Arithmetic, Interactive Math Worksheets">
+  
+  <!-- Favicon -->
+  <link href="logo.png" rel="icon" type="image/png">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Dashboard Styling -->
+  <link rel="stylesheet" href="assets/css/index.css">
+</head>
+<body class="dashboard-page">
+
+  <!-- Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo" id="logoLink">
+        <img src="logo.png" alt="Base2ace Logo" id="logoImg" onerror="this.src='assets/Logo/b2a_logo_white.png'">
+        <h1>Base2ace</h1>
+      </a>
+      
+      <nav class="navmenu">
+        <ul class="nav-links">
+          <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="https://www.base2ace.com/#services" target="_blank" rel="noopener noreferrer">Services</a></li>
+          <li><a href="https://www.base2ace.com/#portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
+          <li><a href="https://www.base2ace.com/#contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <a class="btn-consultation" href="https://www.base2ace.com/#contact" target="_blank" rel="noopener noreferrer" id="consultBtn">Consultation</a>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-content">
+    
+    <!-- Hero Banner -->
+    <section class="hero" id="hero">
+      <h2>Innovating IT & Empowering Education</h2>
+      <h1>Interactive Practice & Exam Sheets</h1>
+      <p>Enhance cognitive training, speed, and mathematical agility. Search and launch from our collection of interactive Abacus, Multiplication, Division, and Practice sheets.</p>
+      
+      <!-- Stats Summary cards -->
+      <div class="stats-container" id="statsContainer">
+        <div class="stat-card" id="statCardSheets">
+          <h3 id="statTotalSheets">0</h3>
+          <p>Worksheets</p>
+        </div>
+        <div class="stat-card" id="statCardModules">
+          <h3 id="statCategories">0</h3>
+          <p>Modules</p>
+        </div>
+        <div class="stat-card" id="statCardLevels">
+          <h3>8</h3>
+          <p>Abacus Levels</p>
+        </div>
+        <div class="stat-card" id="statCardInteractive">
+          <h3>100%</h3>
+          <p>Interactive</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filter Hub -->
+    <div class="search-filter-hub" id="searchFilterHub">
+      <!-- Search Input Container -->
+      <div class="search-box">
+        <i class="fas fa-search" id="searchIcon"></i>
+        <input type="text" id="sheetSearch" placeholder="Search worksheets by name, category, or path..." autocomplete="off">
+      </div>
+      
+      <!-- Filter Tags Row -->
+      <div class="filters-wrapper">
+        <div class="filters-container" id="filtersList">
+          <button class="filter-btn active" data-filter="all" id="filterAll">All Sheets</button>
+          <button class="filter-btn" data-filter="l1-l8" id="filterLevels">Abacus Levels 1-8</button>
+          <button class="filter-btn" data-filter="adv" id="filterAdv">Advanced Level 3</button>
+          <button class="filter-btn" data-filter="multiply" id="filterMultiply">Multiplication</button>
+          <button class="filter-btn" data-filter="division" id="filterDivision">Division</button>
+          <button class="filter-btn" data-filter="exams" id="filterExams">Practice Exams</button>
+          <button class="filter-btn" data-filter="other" id="filterOther">Other Sheets</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sheet Cards Directory -->
+    <section class="directory-section" id="directorySection">
+      <div class="results-count">
+        <span id="resultsCountText">Loading worksheets list...</span>
+      </div>
+      
+      <div class="sheets-grid" id="sheetsGrid">
+        <!-- Javascript dynamically renders cards here -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer" id="mainFooter">
+    <div class="footer-container">
+      <div class="footer-brand" id="footerBrand">
+        <h4>Base2ace Technologies</h4>
+        <p>An ISO 9001:2015 Certified Company specializing in Web Development, Software Engineering, AI Consultancy, and Advanced Education Training (Abacus, Robotics, Vedic Maths, Olympiads).</p>
+        <p style="font-size: 12px; opacity: 0.6;">Delivering high-performance digital solutions and cognitive agility skills.</p>
+      </div>
+      
+      <div class="footer-links" id="footerLinks">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="https://www.base2ace.com/#about" target="_blank" rel="noopener noreferrer">About Us</a></li>
+          <li><a href="https://www.base2ace.com/#services" target="_blank" rel="noopener noreferrer">Services</a></li>
+          <li><a href="https://www.base2ace.com/#portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
+          <li><a href="https://www.base2ace.com/#contact" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-contact" id="footerContact">
+        <h5>Contact Info</h5>
+        <p><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra, India</p>
+        <p><i class="fas fa-envelope"></i> enquiry@base2ace.com</p>
+        <p><i class="fas fa-globe"></i> www.base2ace.com</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom" id="footerBottom">
+      <p>&copy; 2026 Base2ace Technologies. All Rights Reserved. ISO 9001:2015 Certified Company.</p>
+      <p>Practice sheets designed for interactive learning</p>
+    </div>
+  </footer>
+
+  <!-- Scripts Loading -->
+  <script src="assets/js/sheets-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
