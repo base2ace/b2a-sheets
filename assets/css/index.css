@@ -683,3 +683,121 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
   }
 }
+
+/* Share Integration Styles */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-share-card {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all var(--transition-fast);
+}
+
+.btn-share-card:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  background: rgba(39, 174, 96, 0.05);
+}
+
+.card-share-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  background-color: var(--surface-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: var(--border-radius-md);
+  border-bottom-right-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  animation: slideUp var(--transition-fast) forwards;
+  z-index: 5;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.share-overlay-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.8px;
+}
+
+.share-overlay-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.share-overlay-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all var(--transition-fast);
+}
+
+.share-overlay-btn:hover {
+  transform: translateY(-2px);
+}
+
+.share-overlay-btn.whatsapp:hover {
+  background: #25D366;
+  border-color: #25D366;
+  color: #fff;
+}
+
+.share-overlay-btn.gmail:hover {
+  background: #EA4335;
+  border-color: #EA4335;
+  color: #fff;
+}
+
+.share-overlay-btn.copy:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+.share-overlay-btn.close:hover {
+  background: #E74C3C;
+  border-color: #E74C3C;
+  color: #fff;
+}
+

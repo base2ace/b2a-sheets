@@ -127,10 +127,26 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3>${escapeHtml(sheet.title)}</h3>
           <div class="card-footer">
             <span class="sheet-path-text" title="${sheet.path}">${sheet.path}</span>
-            <a href="${sheet.path}" class="btn-open-sheet" target="_blank" rel="noopener noreferrer">
-              <span>Open</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="card-actions">
+              <button class="btn-share-card" onclick="toggleShareOverlay(this, '${sheet.path}', '${escapeJsString(sheet.title)}')" title="Share Sheet">
+                <i class="fas fa-share-alt"></i>
+              </button>
+              <a href="${sheet.path}" class="btn-open-sheet" target="_blank" rel="noopener noreferrer">
+                <span>Open</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Share Overlay -->
+          <div class="card-share-overlay" style="display: none;">
+            <span class="share-overlay-title">Share Sheet</span>
+            <div class="share-overlay-buttons">
+              <button class="share-overlay-btn whatsapp" onclick="shareCardWhatsApp('${sheet.path}', '${escapeJsString(sheet.title)}')" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></button>
+              <button class="share-overlay-btn gmail" onclick="shareCardGmail('${sheet.path}', '${escapeJsString(sheet.title)}')" title="Share via Gmail"><i class="fab fa-envelope"></i></button>
+              <button class="share-overlay-btn copy" onclick="copyCardLink(this, '${sheet.path}')" title="Copy Link"><i class="fas fa-copy"></i></button>
+              <button class="share-overlay-btn close" onclick="closeShareOverlay(this)" title="Cancel"><i class="fas fa-times"></i></button>
+            </div>
           </div>
         </article>
       `;
@@ -191,6 +207,84 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  // Helper to escape single quotes in JS strings
+  function escapeJsString(str) {
+    if (!str) return '';
+    return str.replace(/'/g, "\\'");
+  }
+
+  // Sharing Helper Functions
+  function getAbsoluteSheetUrl(relativeSheetPath) {
+    let basePath = window.location.origin + window.location.pathname;
+    if (!basePath.endsWith('/')) {
+      basePath = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+    }
+    return basePath + relativeSheetPath;
+  }
+
+  // Global window functions for dynamic element inline handlers
+  window.toggleShareOverlay = (btn, path, title) => {
+    const card = btn.closest('.sheet-card');
+    const overlay = card.querySelector('.card-share-overlay');
+    if (overlay) overlay.style.display = 'flex';
+  };
+
+  window.closeShareOverlay = (btn) => {
+    const overlay = btn.closest('.card-share-overlay');
+    if (overlay) overlay.style.display = 'none';
+  };
+
+  window.shareCardWhatsApp = (path, title) => {
+    const url = getAbsoluteSheetUrl(path);
+    const text = encodeURIComponent(`Solve this interactive math worksheet: "${title}" on Base2ace Academy: ` + url);
+    window.open("https://api.whatsapp.com/send?text=" + text, "_blank");
+  };
+
+  window.shareCardGmail = (path, title) => {
+    const url = getAbsoluteSheetUrl(path);
+    const subject = encodeURIComponent(`Interactive Worksheet: ${title}`);
+    const body = encodeURIComponent(`Here is an interactive worksheet you can solve online:\n\n${title}\nLink: ${url}\n\nBase2ace Academy`);
+    window.open("https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=" + subject + "&body=" + body, "_blank");
+  };
+
+  window.copyCardLink = (btn, path) => {
+    const url = getAbsoluteSheetUrl(path);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => showCardSuccess(btn)).catch(() => fallbackCardCopy(btn, url));
+    } else {
+      fallbackCardCopy(btn, url);
+    }
+  };
+
+  function fallbackCardCopy(btn, url) {
+    const textarea = document.createElement("textarea");
+    textarea.value = url;
+    textarea.style.position = "fixed";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      showCardSuccess(btn);
+    } catch (err) {
+      alert("Please copy URL manually: " + url);
+    }
+    document.body.removeChild(textarea);
+  }
+
+  function showCardSuccess(btn) {
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i>';
+    btn.style.background = '#27AE60';
+    btn.style.borderColor = '#27AE60';
+    btn.style.color = '#FFFFFF';
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
   }
 
   // Start initialization
