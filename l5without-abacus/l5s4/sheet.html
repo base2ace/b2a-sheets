@@ -64,6 +64,26 @@
             background: #27AE60;
             color: #FFFFFF;
         }
+            html {
+            background-color: #122C3D;
+            transition: background-color 0.3s;
+        }
+        html[data-theme="light"] {
+            background-color: #F4F6F8;
+        }
+        iframe {
+            display: block;
+        }
+        .section-divider {
+            height: 2px;
+            background-color: #FFFFFF;
+            opacity: 0.15;
+            margin: 0;
+        }
+        body[data-theme="light"] .section-divider {
+            background-color: #122C3D;
+            opacity: 0.3;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
@@ -75,9 +95,12 @@
 
 	<!--Add more sections here. Make a file sectionX.html in the same folder and add a line here.-->
 	<iframe src="section1.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
-    <iframe src="section2.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
+    <div class="section-divider"></div>
+	<iframe src="section2.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
+	<div class="section-divider"></div>
 	<iframe src="section3.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
-    <iframe src="section4.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
+    <div class="section-divider"></div>
+	<iframe src="section4.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
 	
 	<iframe src="..\..\common\footer.html" width="100%" height="120"></iframe>	
 	<!-- Theme Toggle Button -->
@@ -101,6 +124,7 @@
 				setTheme(newTheme);
 			});
 			function setTheme(newTheme) {
+				document.documentElement.setAttribute('data-theme', newTheme);
 				document.body.setAttribute('data-theme', newTheme);
 				try {
 					localStorage.setItem('sheet-theme', newTheme);
