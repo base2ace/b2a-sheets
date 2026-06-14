@@ -4,12 +4,14 @@
     <style>
         /* Style for the top banner */
         .top-banner {
-            background: #bf3129;
-            color: #fff;
-            padding: 20px 0;
+            background: linear-gradient(135deg, #122C3D 0%, #1D4057 100%) !important;
+            border-top: 2px solid #27AE60;
+            color: #E0E6EB;
+            padding: 15px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            font-family: 'Poppins', sans-serif;
         }
 
         .top-banner::before {
@@ -19,16 +21,33 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('abstract-pattern.png'); /* Replace with your abstract pattern image */
-            opacity: 0.5;
+            opacity: 0.15;
             z-index: -1;
         }
 
-        h1, a {
-            font-size: 20px;
-			color: white;
-            font-weight: bold;
-            font-family: 'Poppins', sans-serif; /* Use the 'Poppins' Google Font */
+        h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        a {
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.2s, text-shadow 0.2s;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        a:hover {
+            color: #27AE60;
+            text-shadow: 0 0 10px rgba(39, 174, 96, 0.4);
+        }
+
+        .separator {
+            color: rgba(255, 255, 255, 0.15);
+            margin: 0 15px;
+            font-weight: 300;
         }
 
         p {
@@ -42,7 +61,13 @@
 </head>
 <body>
     <div class="top-banner">
-        <h1><a href="https://base2ace.com" target="_blank">Base2Ace Academy<a/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="mailto://enquiry@base2ace.com" target="_blank">Send Email<a/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="https://wa.me/919271899502" target="_blank">WhatsApp<a/></h1>
+        <h1>
+            <a href="https://base2ace.com" target="_blank" rel="noopener noreferrer">Base2Ace Academy</a>
+            <span class="separator">|</span>
+            <a href="mailto:enquiry@base2ace.com" target="_blank" rel="noopener noreferrer">Send Email</a>
+            <span class="separator">|</span>
+            <a href="https://wa.me/919271899502" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </h1>
     </div>
     
     <!-- The rest of your webpage content goes here -->

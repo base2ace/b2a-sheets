@@ -88,7 +88,117 @@
       }
 
 	
-    </style>
+    
+/* Company Brand Theme Overrides */
+html, body {
+    background-color: #122C3D !important;
+    background: #122C3D !important;
+    color: #E0E6EB !important;
+    font-family: 'Poppins', sans-serif !important;
+    height: auto !important;
+    overflow: hidden !important;
+}
+body {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+h2 {
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 26px !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+table {
+    border: 1px solid #1D4057 !important;
+    background-color: #1D4057 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+    margin: 0 auto !important;
+    color: #FFFFFF !important;
+    width: 100% !important;
+    max-width: 1100px !important;
+}
+td, th {
+    border: 1px solid #122C3D !important;
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    padding: 10px !important;
+    background-color: #1D4057 !important;
+}
+/* Header row coloring (number cells 1 to 10) */
+table:not(#editable):not(#answer) tr:first-child td,
+table:not(#editable):not(#answer) tr:first-child th,
+td[style*="background-color: #F43308"],
+td[style*="background-color: rgb(244, 51, 8)"] {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+}
+/* Editable cells styling */
+td[contenteditable="true"], td#ans {
+    background-color: #122C3D !important;
+    border: 2px solid #1D4057 !important;
+    color: #FFFFFF !important;
+    outline: none !important;
+    transition: border-color 0.2s !important;
+}
+td[contenteditable="true"]:focus, td#ans:focus {
+    border-color: #27AE60 !important;
+}
+/* Check result colors */
+.correct, 
+#editable td[style*="background-color: green"], 
+#editable td[style*="background-color: #58D68D"], 
+#editable td[style*="background-color: rgb(88, 214, 141)"] {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+}
+.wrong, 
+#editable td[style*="background-color: red"], 
+#editable td[style*="background-color: #A0002C"], 
+#editable td[style*="background-color: rgb(160, 0, 44)"] {
+    background-color: #E74C3C !important;
+    color: #FFFFFF !important;
+}
+/* Actual answer cells display */
+#answer td,
+td[id="actual_ans"], 
+td[style*="background-color: #9AD1F7"], 
+td[style*="background-color: rgb(154, 209, 247)"] {
+    background-color: #2980B9 !important;
+    color: #FFFFFF !important;
+}
+/* Check Result Buttons styling */
+.button, button {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 12px 30px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3) !important;
+    display: block !important;
+    margin: 20px auto !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+.button:hover, button:hover {
+    background-color: #219653 !important;
+    transform: translateY(-1px) !important;
+}
+h2#ansLabel, h2#res {
+    color: #E0E6EB !important;
+    text-align: center !important;
+    font-size: 20px !important;
+    margin-top: 15px !important;
+}
+
+</style>
     <script>
 	
 	// Time and total sums settings.
@@ -458,7 +568,117 @@ function DisplayQuestion()
 
     <style>
 
-    </style>
+    
+/* Company Brand Theme Overrides */
+html, body {
+    background-color: #122C3D !important;
+    background: #122C3D !important;
+    color: #E0E6EB !important;
+    font-family: 'Poppins', sans-serif !important;
+    height: auto !important;
+    overflow: hidden !important;
+}
+body {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+h2 {
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 26px !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+table {
+    border: 1px solid #1D4057 !important;
+    background-color: #1D4057 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+    margin: 0 auto !important;
+    color: #FFFFFF !important;
+    width: 100% !important;
+    max-width: 1100px !important;
+}
+td, th {
+    border: 1px solid #122C3D !important;
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    padding: 10px !important;
+    background-color: #1D4057 !important;
+}
+/* Header row coloring (number cells 1 to 10) */
+table:not(#editable):not(#answer) tr:first-child td,
+table:not(#editable):not(#answer) tr:first-child th,
+td[style*="background-color: #F43308"],
+td[style*="background-color: rgb(244, 51, 8)"] {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+}
+/* Editable cells styling */
+td[contenteditable="true"], td#ans {
+    background-color: #122C3D !important;
+    border: 2px solid #1D4057 !important;
+    color: #FFFFFF !important;
+    outline: none !important;
+    transition: border-color 0.2s !important;
+}
+td[contenteditable="true"]:focus, td#ans:focus {
+    border-color: #27AE60 !important;
+}
+/* Check result colors */
+.correct, 
+#editable td[style*="background-color: green"], 
+#editable td[style*="background-color: #58D68D"], 
+#editable td[style*="background-color: rgb(88, 214, 141)"] {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+}
+.wrong, 
+#editable td[style*="background-color: red"], 
+#editable td[style*="background-color: #A0002C"], 
+#editable td[style*="background-color: rgb(160, 0, 44)"] {
+    background-color: #E74C3C !important;
+    color: #FFFFFF !important;
+}
+/* Actual answer cells display */
+#answer td,
+td[id="actual_ans"], 
+td[style*="background-color: #9AD1F7"], 
+td[style*="background-color: rgb(154, 209, 247)"] {
+    background-color: #2980B9 !important;
+    color: #FFFFFF !important;
+}
+/* Check Result Buttons styling */
+.button, button {
+    background-color: #27AE60 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 12px 30px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3) !important;
+    display: block !important;
+    margin: 20px auto !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+.button:hover, button:hover {
+    background-color: #219653 !important;
+    transform: translateY(-1px) !important;
+}
+h2#ansLabel, h2#res {
+    color: #E0E6EB !important;
+    text-align: center !important;
+    font-size: 20px !important;
+    margin-top: 15px !important;
+}
+
+</style>
 
 
 

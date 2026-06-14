@@ -7,137 +7,93 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .share-bar {
+        .top-banner {
+            background: linear-gradient(135deg, #122C3D 0%, #1D4057 100%) !important;
+            border-bottom: 2px solid #27AE60;
+            padding: 15px 0 !important;
+        }
+        .banner-brand {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .banner-logo {
+            height: 55px;
+            width: auto;
+            filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.2));
+            transition: transform 0.3s;
+        }
+        .banner-logo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        .banner-titles {
+            text-align: left;
             font-family: 'Poppins', sans-serif;
-            position: relative;
-            z-index: 10;
         }
-        .share-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
+        .banner-titles h1 {
+            margin: 0;
+            font-size: 28px;
+            line-height: 1.2;
+            letter-spacing: 1px;
+            text-shadow: none;
+            background: linear-gradient(to right, #FFFFFF, #E0E6EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #fff;
-            padding: 6px 12px;
+        .banner-titles p {
+            margin: 3px 0 0 0;
             font-size: 13px;
-            font-weight: 500;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, transform 0.1s;
+            color: #8FA0AC;
         }
-        .share-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-1px);
+        .light-row {
+            background: #0d1f2b !important;
         }
-        .share-btn:active {
-            transform: translateY(0);
+        
+        /* Brand Lightrope Colors override */
+        .lightrope li {
+            background: #27AE60 !important; /* Emerald Green */
+            box-shadow: 0px 4px 24px 3px #27AE60 !important;
         }
-        .share-btn i {
-            font-size: 14px;
+        .lightrope li:nth-child(2n+1) {
+            background: #3498db !important; /* Blue */
+            box-shadow: 0px 4px 24px 3px #3498db !important;
         }
-        .share-btn.whatsapp:hover {
-            background: #25D366;
-            border-color: #25D366;
+        .lightrope li:nth-child(4n+2) {
+            background: #F1C40F !important; /* Gold */
+            box-shadow: 0px 4px 24px 3px #F1C40F !important;
         }
-        .share-btn.gmail:hover {
-            background: #EA4335;
-            border-color: #EA4335;
+
+        
+        @media(max-width: 600px) {
+            .banner-brand {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .banner-titles {
+                text-align: center;
+            }
+            .banner-titles h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="top-banner">
-		<!--  <img id="movingImage" src="val2.png" alt="Moving Image"> -->
-		<!--  <img id="movingImage1" src="val1.png" alt="Moving Image"> -->
-		    <!-- <img id="Tree" src="tree.png" alt="Tree"> -->
-        <h1>Base2Ace Academy</h1>
-        <p>An ISO 9001:2015 Certified Company</p>
-        
-        <div class="share-bar">
-            <span class="share-title">Share Worksheet:</span>
-            <button onclick="shareWhatsApp()" class="share-btn whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-            <button onclick="shareGmail()" class="share-btn gmail" title="Share via Gmail"><i class="fab fa-envelope"></i> Gmail</button>
-            <button onclick="copySheetLink()" class="share-btn copy" id="copyBtn" title="Copy Link"><i class="fas fa-copy"></i> Copy Link</button>
+        <div class="banner-brand">
+            <a href="https://base2ace.com" target="_blank" rel="noopener noreferrer" style="display: flex;">
+                <img src="../logo.png" alt="Base2ace Logo" class="banner-logo" onerror="this.src='../assets/Logo/b2a_logo_white.png'">
+            </a>
+            <div class="banner-titles">
+                <h1>Base2Ace Academy</h1>
+                <p>An ISO 9001:2015 Certified Company</p>
+            </div>
         </div>
     </div>
-    
-    <script>
-    function getParentUrl() {
-        let url = "";
-        try {
-            url = window.parent.location.href;
-        } catch(e) {
-            url = document.referrer;
-        }
-        if (!url || url.indexOf('banner.html') !== -1) {
-            url = window.location.href;
-        }
-        return url;
-    }
-
-    function shareWhatsApp() {
-        const url = getParentUrl();
-        const text = encodeURIComponent("Solve this interactive math worksheet from Base2ace Academy: " + url);
-        window.open("https://api.whatsapp.com/send?text=" + text, "_blank");
-    }
-
-    function shareGmail() {
-        const url = getParentUrl();
-        const subject = encodeURIComponent("Interactive Math Worksheet");
-        const body = encodeURIComponent("Here is an interactive worksheet you can solve online:\n\n" + url + "\n\nBase2ace Academy");
-        window.open("https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=" + subject + "&body=" + body, "_blank");
-    }
-
-    function copySheetLink() {
-        const url = getParentUrl();
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).then(showSuccess).catch(fallbackCopy);
-        } else {
-            fallbackCopy();
-        }
-        
-        function fallbackCopy() {
-            const textarea = document.createElement("textarea");
-            textarea.value = url;
-            textarea.style.position = "fixed";
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand("copy");
-                showSuccess();
-            } catch (err) {
-                alert("Please copy URL manually: " + url);
-            }
-            document.body.removeChild(textarea);
-        }
-        
-        function showSuccess() {
-            const copyBtn = document.getElementById("copyBtn");
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            copyBtn.style.background = '#27AE60';
-            copyBtn.style.borderColor = '#27AE60';
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-                copyBtn.style.background = '';
-                copyBtn.style.borderColor = '';
-            }, 2000);
-        }
-    }
-    </script>
-	
 <!-- <script>
   function moveImage() {
     var img = document.getElementById('movingImage');
@@ -223,5 +179,160 @@ function moveImage1() {
     
     
     <!-- The rest of your webpage content goes here -->
+    <script>
+    function injectSectionStyles() {
+        try {
+            if (window.parent && window.parent !== window) {
+                const parentDoc = window.parent.document;
+                const iframes = parentDoc.querySelectorAll('iframe');
+                
+                iframes.forEach(iframe => {
+                    // Skip banner and footer
+                    if (iframe.src.indexOf('banner.html') !== -1 || iframe.src.indexOf('footer.html') !== -1) {
+                        return;
+                    }
+                    
+                    const inject = () => {
+                        try {
+                            const doc = iframe.contentDocument || iframe.contentWindow.document;
+                            if (!doc || doc.getElementById('company-theme-style')) return;
+                            
+                            const style = doc.createElement('style');
+                            style.id = 'company-theme-style';
+                            style.textContent = `
+                                /* Worksheet Iframe Dark Theme Overrides */
+                                html, body {
+                                    background-color: #122C3D !important;
+                                    background: #122C3D !important;
+                                    color: #E0E6EB !important;
+                                    font-family: 'Poppins', sans-serif !important;
+                                }
+                                
+                                body {
+                                    padding: 20px !important;
+                                    display: flex !important;
+                                    flex-direction: column !important;
+                                    align-items: center !important;
+                                    justify-content: center !important;
+                                }
+                                
+                                h2 {
+                                    color: #FFFFFF !important;
+                                    font-family: 'Poppins', sans-serif !important;
+                                    font-size: 26px !important;
+                                    text-align: center !important;
+                                    margin-bottom: 20px !important;
+                                }
+                                
+                                table {
+                                    border: 1px solid #1D4057 !important;
+                                    background-color: #1D4057 !important;
+                                    border-collapse: separate !important;
+                                    border-spacing: 0 10px !important;
+                                    margin: 0 auto !important;
+                                    color: #FFFFFF !important;
+                                    width: 100% !important;
+                                    max-width: 1100px !important;
+                                }
+                                
+                                td, th {
+                                    border: 1px solid #122C3D !important;
+                                    color: #FFFFFF !important;
+                                    font-family: 'Poppins', sans-serif !important;
+                                    padding: 10px !important;
+                                    background-color: #1D4057 !important;
+                                }
+                                
+                                /* Header row coloring (number cells 1 to 10) */
+                                tr:first-child td, tr:first-child th,
+                                td[style*="background-color: #F43308"],
+                                td[style*="background-color: rgb(244, 51, 8)"] {
+                                    background-color: #27AE60 !important;
+                                    color: #FFFFFF !important;
+                                }
+                                
+                                /* Editable cells styling */
+                                td[contenteditable="true"], td#ans {
+                                    background-color: #122C3D !important;
+                                    border: 2px solid #1D4057 !important;
+                                    color: #FFFFFF !important;
+                                    outline: none !important;
+                                    transition: border-color 0.2s !important;
+                                }
+                                
+                                td[contenteditable="true"]:focus, td#ans:focus {
+                                    border-color: #27AE60 !important;
+                                }
+                                
+                                /* Check result colors */
+                                .correct, td[style*="background-color: green"], td[style*="background-color: #58D68D"], td[style*="background-color: rgb(88, 214, 141)"] {
+                                    background-color: #27AE60 !important;
+                                    color: #FFFFFF !important;
+                                }
+                                
+                                .wrong, td[style*="background-color: red"], td[style*="background-color: #A0002C"], td[style*="background-color: rgb(160, 0, 44)"] {
+                                    background-color: #E74C3C !important;
+                                    color: #FFFFFF !important;
+                                }
+                                
+                                /* Actual answer cells display */
+                                td[id="actual_ans"], td[style*="background-color: #9AD1F7"], td[style*="background-color: rgb(154, 209, 247)"] {
+                                    background-color: #2980B9 !important;
+                                    color: #FFFFFF !important;
+                                }
+                                
+                                /* Check Result Buttons styling */
+                                .button, button {
+                                    background-color: #27AE60 !important;
+                                    color: #FFFFFF !important;
+                                    border: none !important;
+                                    border-radius: 6px !important;
+                                    padding: 12px 30px !important;
+                                    font-size: 15px !important;
+                                    font-weight: 600 !important;
+                                    cursor: pointer !important;
+                                    transition: all 0.2s !important;
+                                    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3) !important;
+                                    display: block !important;
+                                    margin: 20px auto !important;
+                                    font-family: 'Poppins', sans-serif !important;
+                                }
+                                
+                                .button:hover, button:hover {
+                                    background-color: #219653 !important;
+                                    transform: translateY(-1px) !important;
+                                }
+                                
+                                h2#ansLabel, h2#res {
+                                    color: #E0E6EB !important;
+                                    text-align: center !important;
+                                    font-size: 20px !important;
+                                    margin-top: 15px !important;
+                                }
+                            `;
+                            doc.head.appendChild(style);
+                        } catch (e) {
+                            // Suppress errors (mostly during iframe loading transition)
+                        }
+                    };
+                    
+                    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                        inject();
+                    } else {
+                        iframe.addEventListener('load', inject);
+                    }
+                });
+            }
+        } catch (e) {
+            console.error("Iframe theme injection error:", e);
+        }
+    }
+    
+    // Multi-stage trigger to guarantee styling updates
+    setTimeout(injectSectionStyles, 50);
+    setTimeout(injectSectionStyles, 250);
+    setTimeout(injectSectionStyles, 750);
+    setTimeout(injectSectionStyles, 1500);
+    </script>
 </body>
 </html>

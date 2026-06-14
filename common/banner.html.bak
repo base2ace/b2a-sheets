@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <script type="text/javascript" src="diwali.js"></script>  -->
+    <!-- <script type="text/javascript" src="snow.js"></script>   -->
+    <link href="lights.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .share-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 10;
+        }
+        .share-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.1s;
+        }
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+        }
+        .share-btn:active {
+            transform: translateY(0);
+        }
+        .share-btn i {
+            font-size: 14px;
+        }
+        .share-btn.whatsapp:hover {
+            background: #25D366;
+            border-color: #25D366;
+        }
+        .share-btn.gmail:hover {
+            background: #EA4335;
+            border-color: #EA4335;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+		<!--  <img id="movingImage" src="val2.png" alt="Moving Image"> -->
+		<!--  <img id="movingImage1" src="val1.png" alt="Moving Image"> -->
+		    <!-- <img id="Tree" src="tree.png" alt="Tree"> -->
+        <h1>Base2Ace Academy</h1>
+        <p>An ISO 9001:2015 Certified Company</p>
+        
+        <div class="share-bar">
+            <span class="share-title">Share Worksheet:</span>
+            <button onclick="shareWhatsApp()" class="share-btn whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+            <button onclick="shareGmail()" class="share-btn gmail" title="Share via Gmail"><i class="fab fa-envelope"></i> Gmail</button>
+            <button onclick="copySheetLink()" class="share-btn copy" id="copyBtn" title="Copy Link"><i class="fas fa-copy"></i> Copy Link</button>
+        </div>
+    </div>
+    
+    <script>
+    function getParentUrl() {
+        let url = "";
+        try {
+            url = window.parent.location.href;
+        } catch(e) {
+            url = document.referrer;
+        }
+        if (!url || url.indexOf('banner.html') !== -1) {
+            url = window.location.href;
+        }
+        return url;
+    }
+
+    function shareWhatsApp() {
+        const url = getParentUrl();
+        const text = encodeURIComponent("Solve this interactive math worksheet from Base2ace Academy: " + url);
+        window.open("https://api.whatsapp.com/send?text=" + text, "_blank");
+    }
+
+    function shareGmail() {
+        const url = getParentUrl();
+        const subject = encodeURIComponent("Interactive Math Worksheet");
+        const body = encodeURIComponent("Here is an interactive worksheet you can solve online:\n\n" + url + "\n\nBase2ace Academy");
+        window.open("https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=" + subject + "&body=" + body, "_blank");
+    }
+
+    function copySheetLink() {
+        const url = getParentUrl();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(showSuccess).catch(fallbackCopy);
+        } else {
+            fallbackCopy();
+        }
+        
+        function fallbackCopy() {
+            const textarea = document.createElement("textarea");
+            textarea.value = url;
+            textarea.style.position = "fixed";
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                showSuccess();
+            } catch (err) {
+                alert("Please copy URL manually: " + url);
+            }
+            document.body.removeChild(textarea);
+        }
+        
+        function showSuccess() {
+            const copyBtn = document.getElementById("copyBtn");
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            copyBtn.style.background = '#27AE60';
+            copyBtn.style.borderColor = '#27AE60';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.style.background = '';
+                copyBtn.style.borderColor = '';
+            }, 2000);
+        }
+    }
+    </script>
+	
+<!-- <script>
+  function moveImage() {
+    var img = document.getElementById('movingImage');
+    var currentRight = parseFloat(img.style.right) || 0.0;
+
+    // Check if image reached the left end of the screen
+    if (currentRight >= window.innerWidth - img.width) {
+      img.style.right = '0px'; // Reset position to start from the right
+    } else {
+      img.style.right = (currentRight + 0.4) + 'px'; // Change '5' to adjust the movement speed
+    }
+    
+    // Request animation frame to create a smooth movement
+    requestAnimationFrame(moveImage);
+  }
+  
+function moveImage1() {
+  var img = document.getElementById('movingImage1');
+  var currentLeft = parseFloat(img.style.left) || 0.0;
+
+  // Check if image reached the right end of the screen
+  if (currentLeft >= window.innerWidth - img.width) {
+    img.style.left = '0px'; // Reset position to start from the left
+  } else {
+    img.style.left = (currentLeft + 0.4) + 'px'; // Change '0.6' to adjust the movement speed
+  }
+  
+  // Request animation frame to create a smooth movement
+  requestAnimationFrame(moveImage1);
+}
+
+  // Call moveImage function to start the movement
+    moveImage();
+    moveImage1();
+</script>
+ -->
+    <div class="light-row">
+        <ul class="lightrope">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+    </div>
+    
+    
+    <!-- The rest of your webpage content goes here -->
+</body>
+</html>

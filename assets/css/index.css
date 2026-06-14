@@ -693,8 +693,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-share-card {
   background: transparent;
-  color: var(--text-muted);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--accent-color);
+  border: 1px solid rgba(39, 174, 96, 0.25);
   width: 36px;
   height: 36px;
   border-radius: var(--border-radius-sm);

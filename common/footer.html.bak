@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style for the top banner */
+        .top-banner {
+            background: #bf3129;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('abstract-pattern.png'); /* Replace with your abstract pattern image */
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        h1, a {
+            font-size: 20px;
+			color: white;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif; /* Use the 'Poppins' Google Font */
+        }
+
+        p {
+            font-size: 8px;
+            margin-top: 10px;
+        }
+    </style>
+    <!-- <script type="text/javascript" src="diwali.js"></script>  -->
+    <!-- <script type="text/javascript" src="snow.js"></script>  -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top-banner">
+        <h1><a href="https://base2ace.com" target="_blank">Base2Ace Academy<a/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="mailto://enquiry@base2ace.com" target="_blank">Send Email<a/>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="https://wa.me/919271899502" target="_blank">WhatsApp<a/></h1>
+    </div>
+    
+    <!-- The rest of your webpage content goes here -->
+</body>
+</html>
