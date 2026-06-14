@@ -256,6 +256,28 @@ h2#ansLabel, h2#res {
 				InsertRowInTable(table1,i);	
 			}
 			
+						table1.addEventListener('keydown', function(e) {
+				if (e.key === 'Enter') {
+					e.preventDefault();
+					let currentCell = e.target;
+					if (currentCell.tagName === 'TD' && currentCell.id === 'ans') {
+						let currentRow = currentCell.parentElement;
+						let nextRow = currentRow.nextElementSibling;
+						if (nextRow && nextRow.tagName === 'TR') {
+							let nextCell = nextRow.querySelector('#ans') || nextRow.cells[currentCell.cellIndex];
+							if (nextCell) {
+								nextCell.focus();
+								let range = document.createRange();
+								let sel = window.getSelection();
+								range.selectNodeContents(nextCell);
+								range.collapse(false);
+								sel.removeAllRanges();
+								sel.addRange(range);
+							}
+						}
+					}
+				}
+			});
 			document.body.appendChild(table1);
 
 		}

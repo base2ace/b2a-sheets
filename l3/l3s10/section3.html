@@ -249,6 +249,24 @@ window.onload = DiaplayTable(document.getElementById('row1').innerHTML,document.
 
 					}
 					//append the compiled table to the DOM
+										tableedit.addEventListener('keydown', function(e) {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							let currentCell = e.target;
+							if (currentCell.tagName === 'TD') {
+								let nextCell = currentCell.nextElementSibling;
+								if (nextCell && nextCell.tagName === 'TD') {
+									nextCell.focus();
+									let range = document.createRange();
+									let sel = window.getSelection();
+									range.selectNodeContents(nextCell);
+									range.collapse(false);
+									sel.removeAllRanges();
+									sel.addRange(range);
+								}
+							}
+						}
+					});
 					document.body.appendChild(tableedit);
 
 				}
