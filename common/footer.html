@@ -54,12 +54,43 @@
             font-size: 8px;
             margin-top: 10px;
         }
+        
+        /* Light Theme Overrides */
+        html[data-theme="light"] .top-banner,
+        body[data-theme="light"] .top-banner {
+            background: linear-gradient(135deg, #FFFFFF 0%, #EAECEE 100%) !important;
+            border-top: 2px solid #27AE60;
+            color: #1A252C;
+        }
+        html[data-theme="light"] a,
+        body[data-theme="light"] a {
+            color: #122C3D;
+        }
+        html[data-theme="light"] a:hover,
+        body[data-theme="light"] a:hover {
+            color: #27AE60;
+        }
+        html[data-theme="light"] .separator,
+        body[data-theme="light"] .separator {
+            color: rgba(18, 44, 61, 0.25);
+        }
     </style>
     <!-- <script type="text/javascript" src="diwali.js"></script>  -->
     <!-- <script type="text/javascript" src="snow.js"></script>  -->
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script>
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'SET_THEME') {
+            document.documentElement.setAttribute('data-theme', e.data.theme);
+            document.body.setAttribute('data-theme', e.data.theme);
+        }
+    });
+    if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'REQUEST_THEME' }, '*');
+    }
+    </script>
     <div class="top-banner">
         <h1>
             <a href="https://base2ace.com" target="_blank" rel="noopener noreferrer">Base2Ace Academy</a>

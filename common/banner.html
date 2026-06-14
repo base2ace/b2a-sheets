@@ -80,9 +80,41 @@
                 font-size: 22px;
             }
         }
+        
+        /* Light Theme Overrides */
+        html[data-theme="light"] .top-banner,
+        body[data-theme="light"] .top-banner {
+            background: linear-gradient(135deg, #FFFFFF 0%, #EAECEE 100%) !important;
+            border-bottom: 2px solid #27AE60;
+        }
+        html[data-theme="light"] .banner-titles h1,
+        body[data-theme="light"] .banner-titles h1 {
+            background: linear-gradient(to right, #122C3D, #1D4057) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        html[data-theme="light"] .banner-titles p,
+        body[data-theme="light"] .banner-titles p {
+            color: #5D6D7E !important;
+        }
+        html[data-theme="light"] .light-row,
+        body[data-theme="light"] .light-row {
+            background: #D5D8DC !important;
+        }
     </style>
 </head>
 <body>
+    <script>
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'SET_THEME') {
+            document.documentElement.setAttribute('data-theme', e.data.theme);
+            document.body.setAttribute('data-theme', e.data.theme);
+        }
+    });
+    if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'REQUEST_THEME' }, '*');
+    }
+    </script>
     <div class="top-banner">
         <div class="banner-brand">
             <a href="https://base2ace.com" target="_blank" rel="noopener noreferrer" style="display: flex;">

@@ -17,6 +17,53 @@
             font-size: 18px;
             margin-top: 10px;
         }
+            body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body[data-theme="light"] {
+            background-color: #F4F6F8 !important;
+            color: #1A252C !important;
+        }
+        body[data-theme="light"] h1 {
+            background: linear-gradient(to right, #122C3D, #1D4057) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #27AE60;
+            background: rgba(29, 64, 87, 0.8);
+            color: #FFFFFF;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: #27AE60;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+        body[data-theme="light"] .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1A252C;
+            border-color: #27AE60;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body[data-theme="light"] .theme-toggle-btn:hover {
+            background: #27AE60;
+            color: #FFFFFF;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
@@ -33,6 +80,63 @@
     <iframe src="section4.html" width="100%" height="960" style="border: none; overflow: hidden;"></iframe>
 	
 	<iframe src="..\..\common\footer.html" width="100%" height="120"></iframe>	
+	<!-- Theme Toggle Button -->
+	<button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+		<svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+		<svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+	</button>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const toggleBtn = document.getElementById('theme-toggle');
+			const sunIcon = toggleBtn.querySelector('.sun-icon');
+			const moonIcon = toggleBtn.querySelector('.moon-icon');
+			let theme = 'dark';
+			try {
+				theme = localStorage.getItem('sheet-theme') || 'dark';
+			} catch(e) {}
+			setTheme(theme);
+			toggleBtn.addEventListener('click', function() {
+				const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+				setTheme(newTheme);
+			});
+			function setTheme(newTheme) {
+				document.body.setAttribute('data-theme', newTheme);
+				try {
+					localStorage.setItem('sheet-theme', newTheme);
+				} catch(e) {}
+				if (newTheme === 'dark') {
+					sunIcon.style.display = 'none';
+					moonIcon.style.display = 'block';
+				} else {
+					sunIcon.style.display = 'block';
+					moonIcon.style.display = 'none';
+				}
+				broadcastTheme(newTheme);
+			}
+			function broadcastTheme(newTheme) {
+				document.querySelectorAll('iframe').forEach(iframe => {
+					try {
+						if (iframe.contentWindow) {
+							iframe.contentWindow.postMessage({ type: 'SET_THEME', theme: newTheme }, '*');
+						}
+					} catch(e) {}
+				});
+			}
+			window.addEventListener('message', function(event) {
+				if (event.data && event.data.type === 'REQUEST_THEME') {
+					const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+					broadcastTheme(currentTheme);
+				}
+			});
+			document.querySelectorAll('iframe').forEach(iframe => {
+				iframe.addEventListener('load', function() {
+					const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+					broadcastTheme(currentTheme);
+				});
+			});
+		});
+	</script>
 </body>
 </html>
 
