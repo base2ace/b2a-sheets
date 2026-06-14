@@ -252,20 +252,40 @@ window.onload = DiaplayTable(document.getElementById('row1').innerHTML,document.
 
 					}
 					//append the compiled table to the DOM
-										tableedit.addEventListener('keydown', function(e) {
+															tableedit.addEventListener('keypress', function(e) {
+						if (!/[0-9\-]/.test(e.key) && e.key !== 'Enter') {
+							e.preventDefault();
+						}
+					});
+					tableedit.addEventListener('paste', function(e) {
+						e.preventDefault();
+						let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+						if (/^\-?[0-9]*$/.test(text)) {
+							document.execCommand('insertText', false, text);
+						}
+					});
+					tableedit.addEventListener('keydown', function(e) {
 						if (e.key === 'Enter') {
 							e.preventDefault();
-							let currentCell = e.target;
-							if (currentCell.tagName === 'TD') {
-								let nextCell = currentCell.nextElementSibling;
-								if (nextCell && nextCell.tagName === 'TD') {
-									nextCell.focus();
-									let range = document.createRange();
-									let sel = window.getSelection();
-									range.selectNodeContents(nextCell);
-									range.collapse(false);
-									sel.removeAllRanges();
-									sel.addRange(range);
+							let selection = window.getSelection();
+							if (selection.rangeCount > 0) {
+								let range = selection.getRangeAt(0);
+								let node = range.startContainer;
+								while (node && node.tagName !== 'TD' && node !== tableedit) {
+									node = node.parentNode;
+								}
+								if (node && node.tagName === 'TD') {
+									let currentCell = node;
+									let nextCell = currentCell.nextElementSibling;
+									if (nextCell && nextCell.tagName === 'TD') {
+										nextCell.focus();
+										let nextRange = document.createRange();
+										let sel = window.getSelection();
+										nextRange.selectNodeContents(nextCell);
+										nextRange.collapse(false);
+										sel.removeAllRanges();
+										sel.addRange(nextRange);
+									}
 								}
 							}
 						}

@@ -258,7 +258,25 @@ h2#ansLabel, h2#res {
 				InsertRowInTable(table1,i);	
 			}
 			
-						table1.addEventListener('keydown', function(e) {
+									table1.addEventListener('keypress', function(e) {
+				let currentCell = e.target;
+				if (currentCell.tagName === 'TD' && currentCell.id === 'ans') {
+					if (!/[0-9\-\.]/.test(e.key) && e.key !== 'Enter') {
+						e.preventDefault();
+					}
+				}
+			});
+			table1.addEventListener('paste', function(e) {
+				let currentCell = e.target;
+				if (currentCell.tagName === 'TD' && currentCell.id === 'ans') {
+					e.preventDefault();
+					let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+					if (/^\-?[0-9\.]*$/.test(text)) {
+						document.execCommand('insertText', false, text);
+					}
+				}
+			});
+			table1.addEventListener('keydown', function(e) {
 				if (e.key === 'Enter') {
 					e.preventDefault();
 					let currentCell = e.target;
