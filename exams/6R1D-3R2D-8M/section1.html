@@ -161,13 +161,18 @@ td[contenteditable="true"]:focus, td#ans:focus {
     background-color: #E74C3C !important;
     color: #FFFFFF !important;
 }
+/* Hide actual answers key by default to prevent space taking */
+td#actual_ans {
+    display: none !important;
+}
 /* Actual answer cells display */
 #answer td,
-td[id="actual_ans"], 
+td#actual_ans[style*="background"], 
 td[style*="background-color: #9AD1F7"], 
 td[style*="background-color: rgb(154, 209, 247)"] {
     background-color: #2980B9 !important;
     color: #FFFFFF !important;
+    display: table-cell !important;
 }
 /* Check Result Buttons styling */
 .button, button {
@@ -599,13 +604,18 @@ td[contenteditable="true"]:focus, td#ans:focus {
     background-color: #E74C3C !important;
     color: #FFFFFF !important;
 }
+/* Hide actual answers key by default to prevent space taking */
+td#actual_ans {
+    display: none !important;
+}
 /* Actual answer cells display */
 #answer td,
-td[id="actual_ans"], 
+td#actual_ans[style*="background"], 
 td[style*="background-color: #9AD1F7"], 
 td[style*="background-color: rgb(154, 209, 247)"] {
     background-color: #2980B9 !important;
     color: #FFFFFF !important;
+    display: table-cell !important;
 }
 /* Check Result Buttons styling */
 .button, button {
