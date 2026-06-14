@@ -249,6 +249,12 @@ h2#ansLabel, h2#res {
     let timerDisplay = document.getElementById('timer');
     let questionNumberDisplay = document.getElementById('question-number');
 
+    userAnswerInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        checkAnswer();
+      }
+    });
+
     let questions = [];
     let currentQuestionIndex = 0;
     let score = 0;
