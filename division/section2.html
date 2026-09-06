@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divisibility Rules (÷ 6, ÷ 7, ÷ 8, ÷ 9) – Random Practice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ============================================================
+       BASE2ACE BRAND DESIGN SYSTEM & THEME TOKENS
+       ============================================================ */
+    :root {
+      --bg-color: #122C3D;
+      --surface-color: #1D4057;
+      --card-bg: #16364D;
+      --border-color: #244C68;
+      --text-color: #E0E6EB;
+      --text-muted: #8FA0AC;
+      --heading-bg: #27AE60;
+      --heading-text: #FFFFFF;
+      --btn-bg: #27AE60;
+      --btn-hover: #219653;
+      --accent-color: #27AE60;
+      --correct-bg: #27AE60;
+      --correct-border: #1E8449;
+      --wrong-bg: #E74C3C;
+      --wrong-border: #C0392B;
+      --unattempted-bg: #E67E22;
+      --input-bg: #122C3D;
+      --input-border: #2A5473;
+      --row-hover: rgba(39, 174, 96, 0.08);
+      --badge-bg: rgba(39, 174, 96, 0.2);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    html[data-theme="light"], body[data-theme="light"] {
+      --bg-color: #F4F6F8;
+      --surface-color: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --border-color: #D5DBDB;
+      --text-color: #1A252C;
+      --text-muted: #627482;
+      --heading-bg: #27AE60;
+      --heading-text: #FFFFFF;
+      --btn-bg: #27AE60;
+      --btn-hover: #219653;
+      --accent-color: #27AE60;
+      --correct-bg: #27AE60;
+      --correct-border: #1E8449;
+      --wrong-bg: #E74C3C;
+      --wrong-border: #C0392B;
+      --unattempted-bg: #D35400;
+      --input-bg: #FFFFFF;
+      --input-border: #BDC3C7;
+      --row-hover: rgba(39, 174, 96, 0.06);
+      --badge-bg: rgba(39, 174, 96, 0.15);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      padding: 20px 15px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .sheet-header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .sheet-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text-color);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .sheet-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .sheet-subtitle span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Controls Toolbar */
+    .toolbar-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background-color: var(--btn-bg);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.35);
+    }
+    .btn-primary:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(39, 174, 96, 0.45);
+    }
+
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+    .btn-secondary:hover {
+      background-color: rgba(39, 174, 96, 0.15);
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px dashed var(--border-color);
+    }
+    .btn-outline:hover {
+      color: var(--text-color);
+      border-color: var(--accent-color);
+    }
+
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--badge-bg);
+      color: var(--accent-color);
+      border: 1px solid rgba(39, 174, 96, 0.3);
+    }
+
+    /* Rules Guide */
+    .rules-guide {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      padding: 16px 20px;
+      display: none;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.3s ease;
+    }
+    .rules-guide.active {
+      display: block;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .rule-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .rule-card-header {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--accent-color);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rule-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Results Panel */
+    .results-panel {
+      background: var(--surface-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-md);
+      display: none;
+      animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .results-panel.show {
+      display: block;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .score-headline {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .score-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(39, 174, 96, 0.2);
+      border: 2px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--accent-color);
+    }
+
+    .score-text-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .score-text-marks {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-color);
+      line-height: 1.1;
+    }
+
+    .score-badge {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: var(--btn-bg);
+      color: #FFFFFF;
+    }
+
+    .results-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .stat-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .stat-val.correct { color: #27AE60; }
+    .stat-val.wrong { color: #E74C3C; }
+    .stat-val.unattempted { color: #E67E22; }
+    .stat-val.percent { color: #3498DB; }
+
+    .stat-lbl {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Legend */
+    .legend-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .legend-items {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .legend-symbol {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .legend-symbol.tick {
+      background: rgba(39, 174, 96, 0.2);
+      color: #27AE60;
+      border: 1px solid #27AE60;
+    }
+    .legend-symbol.cross {
+      background: rgba(231, 76, 60, 0.2);
+      color: #E74C3C;
+      border: 1px solid #E74C3C;
+    }
+
+    .legend-shortcut-tip {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Table */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      background: var(--surface-color);
+    }
+
+    table.divisibility-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      table-layout: fixed;
+    }
+
+    table.divisibility-table th {
+      background-color: var(--heading-bg);
+      color: var(--heading-text);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+
+    table.divisibility-table th.col-q { width: 65px; }
+    table.divisibility-table th.col-num { width: 160px; }
+    table.divisibility-table th.col-rule { width: 150px; }
+    table.divisibility-table th.col-score { width: 110px; }
+
+    table.divisibility-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 6px;
+      font-size: 15px;
+      vertical-align: middle;
+      transition: background-color 0.2s ease;
+    }
+
+    table.divisibility-table tr:hover {
+      background-color: var(--row-hover);
+    }
+
+    .q-num-cell {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .num-cell {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-color);
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Interactive Cells */
+    .ans-cell {
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+      outline: none;
+      height: 52px;
+    }
+
+    .ans-cell:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--accent-color);
+    }
+
+    .cell-toggle-group {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      padding: 4px 8px;
+      transition: all 0.2s ease;
+    }
+
+    .ans-cell:hover .cell-toggle-group {
+      border-color: var(--accent-color);
+    }
+
+    .cell-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 16px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .cell-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-color);
+      transform: scale(1.1);
+    }
+
+    .cell-btn.tick.selected {
+      background-color: #27AE60;
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(39, 174, 96, 0.4);
+    }
+
+    .cell-btn.cross.selected {
+      background-color: #E74C3C;
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(231, 76, 60, 0.4);
+    }
+
+    .ans-cell.graded-correct {
+      background-color: rgba(39, 174, 96, 0.18) !important;
+    }
+    .ans-cell.graded-correct .cell-toggle-group {
+      border-color: #27AE60;
+      background-color: rgba(39, 174, 96, 0.25);
+    }
+
+    .ans-cell.graded-wrong {
+      background-color: rgba(231, 76, 60, 0.18) !important;
+    }
+    .ans-cell.graded-wrong .cell-toggle-group {
+      border-color: #E74C3C;
+      background-color: rgba(231, 76, 60, 0.25);
+    }
+
+    .row-score-cell {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .row-score-cell.perfect {
+      color: #27AE60;
+    }
+    .row-score-cell.has-wrong {
+      color: #E67E22;
+    }
+
+    .bottom-actions {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-large {
+      padding: 14px 34px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 12px 8px 40px; }
+      .sheet-title { font-size: 18px; }
+      .toolbar-card { flex-direction: column; align-items: stretch; }
+      .toolbar-left, .toolbar-right { justify-content: center; }
+      table.divisibility-table th, table.divisibility-table td { padding: 6px 3px; }
+      .cell-btn { width: 30px; height: 30px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Title Area -->
+    <header class="sheet-header">
+      <h1 class="sheet-title" id="mainTitle">Divisibility Rules (÷ 6, ÷ 7, ÷ 8, ÷ 9) – Random Practice</h1>
+      <div class="sheet-subtitle">
+        <span><i class="fas fa-calculator"></i> 20 Questions</span>
+        <span>•</span>
+        <span><i class="fas fa-check-double"></i> 80 Answer Points (4 Marks / Q)</span>
+        <span>•</span>
+        <span id="activeSetBadge" class="mode-badge"><i class="fas fa-dice"></i> Random Practice Set</span>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar-card">
+      <div class="toolbar-left">
+        <button id="btnNewSet" class="btn btn-secondary" title="Generate 20 new random questions">
+          <i class="fas fa-random"></i> New Random Set
+        </button>
+        <button id="btnSampleSet" class="btn btn-secondary" title="Load curated 20 sample questions for 6, 7, 8, 9">
+          <i class="fas fa-file-alt"></i> Curated Sample Sheet
+        </button>
+        <button id="btnToggleRules" class="btn btn-outline" title="Show/hide divisibility rules helper">
+          <i class="fas fa-lightbulb"></i> Rules Guide
+        </button>
+      </div>
+
+      <div class="toolbar-right">
+        <button id="btnReset" class="btn btn-outline" title="Clear all entered answers">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+        <button id="btnCheckTop" class="btn btn-primary" title="Grade all answers and calculate marks">
+          <i class="fas fa-check-circle"></i> Check Answers
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Rules Guide (6, 7, 8, 9) -->
+    <div id="rulesGuide" class="rules-guide">
+      <h3 style="font-size: 15px; margin-bottom: 8px; color: var(--text-color);"><i class="fas fa-book-open"></i> Quick Divisibility Rules Guide (6, 7, 8, 9)</h3>
+      <div class="rules-grid">
+        <div class="rule-card">
+          <div class="rule-card-header">÷ 6</div>
+          <p>The number is divisible by <strong>both 2 and 3</strong> (it is even AND digit sum is divisible by 3).</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header">÷ 7</div>
+          <p>Double the last digit, subtract it from the remaining truncated number. If the difference is a multiple of 7 (or 0), it is divisible by 7.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header">÷ 8</div>
+          <p>The number formed by the <strong>last 3 digits</strong> is divisible by 8, or the number ends in <strong>000</strong>.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-card-header">÷ 9</div>
+          <p>The <strong>sum of all digits</strong> is divisible by 9.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marks & Results Panel -->
+    <div id="resultsPanel" class="results-panel">
+      <div class="results-header">
+        <div class="score-headline">
+          <div class="score-icon-wrap" id="scoreIcon">
+            <i class="fas fa-award"></i>
+          </div>
+          <div>
+            <div class="score-text-title">Total Marks Obtained</div>
+            <div class="score-text-marks" id="marksDisplay">0 / 80</div>
+          </div>
+        </div>
+        <div>
+          <span class="score-badge" id="performanceBadge">Excellent</span>
+        </div>
+      </div>
+
+      <div class="results-stats-row">
+        <div class="stat-box">
+          <div class="stat-val correct" id="statCorrect">0</div>
+          <div class="stat-lbl">Correct Answers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val wrong" id="statWrong">0</div>
+          <div class="stat-lbl">Incorrect</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val unattempted" id="statUnattempted">0</div>
+          <div class="stat-lbl">Unattempted</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val percent" id="statPercent">0%</div>
+          <div class="stat-lbl">Accuracy</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statPerfectRows" style="color: var(--text-color);">0 / 20</div>
+          <div class="stat-lbl">Fully Solved Rows</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <div class="legend-items">
+        <div class="legend-pill">
+          <span class="legend-symbol tick">✓</span>
+          <span>= divisible exactly</span>
+        </div>
+        <div class="legend-pill">
+          <span class="legend-symbol cross">✗</span>
+          <span>= not divisible exactly</span>
+        </div>
+      </div>
+      <div class="legend-shortcut-tip">
+        <span><i class="fas fa-keyboard"></i> Click ✓ or ✗, or press <strong>1/y</strong> (✓) and <strong>0/n/x</strong> (✗)</span>
+      </div>
+    </div>
+
+    <!-- Interactive Table (÷6, ÷7, ÷8, ÷9) -->
+    <div class="table-responsive">
+      <table class="divisibility-table" id="questionsTable">
+        <thead>
+          <tr>
+            <th class="col-q">Q.</th>
+            <th class="col-num">Number</th>
+            <th class="col-rule">÷ 6</th>
+            <th class="col-rule">÷ 7</th>
+            <th class="col-rule">÷ 8</th>
+            <th class="col-rule">÷ 9</th>
+            <th class="col-score">Marks</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Dynamically populated rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bottom Check Action -->
+    <div class="bottom-actions">
+      <button id="btnCheckBottom" class="btn btn-primary btn-large">
+        <i class="fas fa-check-circle"></i> Check Answers & Grade
+      </button>
+      <button id="btnResetBottom" class="btn btn-secondary btn-large">
+        <i class="fas fa-redo"></i> Reset Sheet
+      </button>
+      <button id="btnNewSetBottom" class="btn btn-secondary btn-large">
+        <i class="fas fa-random"></i> Generate New Practice Set
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // Divisors for Sheet 2
+    const DIVISORS = [6, 7, 8, 9];
+
+    // Curated 20 sample numbers representing rules for 6, 7, 8, 9
+    const SAMPLE_NUMBERS = [
+      720, 504, 343, 648, 1248, 
+      875, 960, 792, 1458, 1008, 
+      252, 672, 819, 1372, 576, 
+      315, 432, 216, 1729, 684
+    ];
+
+    let currentQuestions = [];
+    let userAnswers = {};
+    let isGraded = false;
+
+    function isDivisible(num, divisor) {
+      return num % divisor === 0;
+    }
+
+    function getDivisibilityExplanation(num, divisor) {
+      switch(divisor) {
+        case 6: {
+          const by2 = num % 2 === 0;
+          const sum = String(num).split('').reduce((acc, d) => acc + parseInt(d, 10), 0);
+          const by3 = sum % 3 === 0;
+          return `Even: ${by2 ? 'Yes' : 'No'}, Digit sum: ${sum} (div by 3: ${by3 ? 'Yes' : 'No'}).`;
+        }
+        case 7: {
+          const last = num % 10;
+          const rest = Math.floor(num / 10);
+          const diff = Math.abs(rest - 2 * last);
+          return `|${rest} - 2(${last})| = ${diff} (${diff % 7 === 0 ? 'divisible by 7' : 'not divisible by 7'}).`;
+        }
+        case 8: {
+          const last3 = num % 1000;
+          if (last3 === 0 && Math.abs(num) >= 1000) {
+            return `Ends in 000 (divisible by 8).`;
+          }
+          return `Last 3 digits: ${last3} (${last3 % 8 === 0 ? 'divisible by 8' : 'not divisible by 8'}).`;
+        }
+        case 9: {
+          const sum = String(num).split('').reduce((acc, d) => acc + parseInt(d, 10), 0);
+          return `Sum of digits: ${sum} (${sum % 9 === 0 ? 'divisible by 9' : 'not divisible by 9'}).`;
+        }
+        default:
+          return '';
+      }
+    }
+
+    function generateRandomNumbers() {
+      const generated = new Set();
+      const result = [];
+
+      function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      // Generate 4 numbers in 2-digit range (36 to 99)
+      while (result.length < 4) {
+        const n = rand(36, 99);
+        if (!generated.has(n)) {
+          generated.add(n);
+          result.push(n);
+        }
+      }
+
+      // Generate 12 numbers in 3-digit range (102 to 999)
+      while (result.length < 16) {
+        const n = rand(102, 999);
+        if (!generated.has(n)) {
+          generated.add(n);
+          result.push(n);
+        }
+      }
+
+      // Generate 4 numbers in 4-digit range (1000 to 2999)
+      while (result.length < 20) {
+        const n = rand(1002, 2999);
+        if (!generated.has(n)) {
+          generated.add(n);
+          result.push(n);
+        }
+      }
+
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+
+      return result;
+    }
+
+    function renderTable(numbers, modeLabel) {
+      currentQuestions = numbers;
+      userAnswers = {};
+      isGraded = false;
+
+      const resultsPanel = document.getElementById('resultsPanel');
+      resultsPanel.classList.remove('show');
+
+      document.getElementById('activeSetBadge').innerHTML = 
+        modeLabel === 'sample' 
+          ? '<i class="fas fa-file-alt"></i> Curated Sample Sheet' 
+          : '<i class="fas fa-dice"></i> Random Practice Set';
+
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      numbers.forEach((num, qIdx) => {
+        const tr = document.createElement('tr');
+        tr.id = `row_${qIdx}`;
+
+        // Question Number
+        const tdQ = document.createElement('td');
+        tdQ.className = 'q-num-cell';
+        tdQ.textContent = qIdx + 1;
+        tr.appendChild(tdQ);
+
+        // Number
+        const tdNum = document.createElement('td');
+        tdNum.className = 'num-cell';
+        tdNum.textContent = num;
+        tr.appendChild(tdNum);
+
+        // Divisor columns (÷6, ÷7, ÷8, ÷9)
+        DIVISORS.forEach(div => {
+          const tdAns = document.createElement('td');
+          tdAns.className = 'ans-cell';
+          tdAns.id = `cell_${qIdx}_${div}`;
+          tdAns.tabIndex = 0;
+          tdAns.setAttribute('data-row', qIdx);
+          tdAns.setAttribute('data-div', div);
+
+          tdAns.innerHTML = `
+            <div class="cell-toggle-group">
+              <button type="button" class="cell-btn tick" data-action="tick" title="Mark Divisible (✓)">✓</button>
+              <button type="button" class="cell-btn cross" data-action="cross" title="Mark Not Divisible (✗)">✗</button>
+            </div>
+          `;
+
+          tdAns.addEventListener('click', (e) => {
+            handleCellInteraction(qIdx, div, e.target);
+          });
+
+          tdAns.addEventListener('keydown', (e) => {
+            handleCellKeyboard(e, qIdx, div);
+          });
+
+          tr.appendChild(tdAns);
+        });
+
+        // Row score cell
+        const tdScore = document.createElement('td');
+        tdScore.className = 'row-score-cell';
+        tdScore.id = `row_score_${qIdx}`;
+        tdScore.textContent = '—';
+        tr.appendChild(tdScore);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function handleCellInteraction(qIdx, div, target) {
+      const key = `${qIdx}_${div}`;
+      const current = userAnswers[key] || null;
+      let nextState = null;
+
+      const isTickBtn = target.closest('.cell-btn.tick');
+      const isCrossBtn = target.closest('.cell-btn.cross');
+
+      if (isTickBtn) {
+        nextState = current === 'tick' ? null : 'tick';
+      } else if (isCrossBtn) {
+        nextState = current === 'cross' ? null : 'cross';
+      } else {
+        if (!current) nextState = 'tick';
+        else if (current === 'tick') nextState = 'cross';
+        else nextState = null;
+      }
+
+      setCellAnswer(qIdx, div, nextState);
+    }
+
+    function handleCellKeyboard(e, qIdx, div) {
+      const key = e.key.toLowerCase();
+      let handled = false;
+
+      if (key === '1' || key === 'y' || key === 't') {
+        setCellAnswer(qIdx, div, 'tick');
+        handled = true;
+      } else if (key === '0' || key === 'n' || key === 'x') {
+        setCellAnswer(qIdx, div, 'cross');
+        handled = true;
+      } else if (key === 'backspace' || key === 'delete') {
+        setCellAnswer(qIdx, div, null);
+        handled = true;
+      } else if (key === ' ' || key === 'enter') {
+        const current = userAnswers[`${qIdx}_${div}`];
+        setCellAnswer(qIdx, div, current === 'tick' ? 'cross' : (current === 'cross' ? null : 'tick'));
+        handled = true;
+      } else if (key === 'arrowright') {
+        moveFocus(qIdx, div, 0, 1);
+        handled = true;
+      } else if (key === 'arrowleft') {
+        moveFocus(qIdx, div, 0, -1);
+        handled = true;
+      } else if (key === 'arrowdown') {
+        moveFocus(qIdx, div, 1, 0);
+        handled = true;
+      } else if (key === 'arrowup') {
+        moveFocus(qIdx, div, -1, 0);
+        handled = true;
+      }
+
+      if (handled) e.preventDefault();
+    }
+
+    function moveFocus(qIdx, div, rowDelta, colDelta) {
+      const divIndex = DIVISORS.indexOf(div);
+      const targetDivIndex = divIndex + colDelta;
+      const targetRow = qIdx + rowDelta;
+
+      if (targetRow >= 0 && targetRow < currentQuestions.length &&
+          targetDivIndex >= 0 && targetDivIndex < DIVISORS.length) {
+        const nextCell = document.getElementById(`cell_${targetRow}_${DIVISORS[targetDivIndex]}`);
+        if (nextCell) nextCell.focus();
+      }
+    }
+
+    function setCellAnswer(qIdx, div, state) {
+      const key = `${qIdx}_${div}`;
+      userAnswers[key] = state;
+
+      const cell = document.getElementById(`cell_${key}`);
+      if (!cell) return;
+
+      const tickBtn = cell.querySelector('.cell-btn.tick');
+      const crossBtn = cell.querySelector('.cell-btn.cross');
+
+      tickBtn.classList.toggle('selected', state === 'tick');
+      crossBtn.classList.toggle('selected', state === 'cross');
+
+      if (isGraded) {
+        cell.classList.remove('graded-correct', 'graded-wrong');
+        cell.title = '';
+      }
+    }
+
+    function checkAnswers() {
+      const totalPossible = currentQuestions.length * DIVISORS.length; // 80 marks
+      let totalMarks = 0;
+      let correctCount = 0;
+      let wrongCount = 0;
+      let unattemptedCount = 0;
+      let perfectRowsCount = 0;
+
+      currentQuestions.forEach((num, qIdx) => {
+        let rowCorrect = 0;
+
+        DIVISORS.forEach(div => {
+          const key = `${qIdx}_${div}`;
+          const userVal = userAnswers[key] || null;
+          const actuallyDivisible = isDivisible(num, div);
+          const correctVal = actuallyDivisible ? 'tick' : 'cross';
+
+          const cell = document.getElementById(`cell_${key}`);
+          cell.classList.remove('graded-correct', 'graded-wrong');
+
+          if (!userVal) {
+            unattemptedCount++;
+            cell.classList.add('graded-wrong');
+            cell.title = `Unattempted. ${actuallyDivisible ? 'Divisible (✓)' : 'Not Divisible (✗)'}. ${getDivisibilityExplanation(num, div)}`;
+          } else if (userVal === correctVal) {
+            correctCount++;
+            rowCorrect++;
+            totalMarks++;
+            cell.classList.add('graded-correct');
+            cell.title = `Correct! ${getDivisibilityExplanation(num, div)}`;
+          } else {
+            wrongCount++;
+            cell.classList.add('graded-wrong');
+            cell.title = `Incorrect. Actually ${actuallyDivisible ? 'Divisible (✓)' : 'Not Divisible (✗)'}. ${getDivisibilityExplanation(num, div)}`;
+          }
+        });
+
+        const scoreCell = document.getElementById(`row_score_${qIdx}`);
+        scoreCell.textContent = `${rowCorrect} / ${DIVISORS.length}`;
+        scoreCell.className = `row-score-cell ${rowCorrect === DIVISORS.length ? 'perfect' : 'has-wrong'}`;
+
+        if (rowCorrect === DIVISORS.length) {
+          perfectRowsCount++;
+        }
+      });
+
+      isGraded = true;
+
+      const marksDisplay = document.getElementById('marksDisplay');
+      marksDisplay.textContent = `${totalMarks} / ${totalPossible}`;
+
+      document.getElementById('statCorrect').textContent = correctCount;
+      document.getElementById('statWrong').textContent = wrongCount;
+      document.getElementById('statUnattempted').textContent = unattemptedCount;
+      document.getElementById('statPercent').textContent = `${Math.round((totalMarks / totalPossible) * 100)}%`;
+      document.getElementById('statPerfectRows').textContent = `${perfectRowsCount} / 20`;
+
+      const badge = document.getElementById('performanceBadge');
+      const icon = document.getElementById('scoreIcon');
+      const percent = (totalMarks / totalPossible) * 100;
+
+      if (percent >= 90) {
+        badge.textContent = '🌟 Master of Divisibility (6, 7, 8, 9)!';
+        badge.style.background = '#27AE60';
+        icon.innerHTML = '<i class="fas fa-trophy" style="color: #F1C40F;"></i>';
+      } else if (percent >= 75) {
+        badge.textContent = '🎉 Excellent Work!';
+        badge.style.background = '#27AE60';
+        icon.innerHTML = '<i class="fas fa-medal" style="color: #27AE60;"></i>';
+      } else if (percent >= 50) {
+        badge.textContent = '👍 Good Effort!';
+        badge.style.background = '#3498DB';
+        icon.innerHTML = '<i class="fas fa-thumbs-up" style="color: #3498DB;"></i>';
+      } else {
+        badge.textContent = '📚 Keep Practicing!';
+        badge.style.background = '#E67E22';
+        icon.innerHTML = '<i class="fas fa-book-reader" style="color: #E67E22;"></i>';
+      }
+
+      const resultsPanel = document.getElementById('resultsPanel');
+      resultsPanel.classList.add('show');
+      resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetSheet() {
+      userAnswers = {};
+      isGraded = false;
+
+      DIVISORS.forEach(div => {
+        currentQuestions.forEach((_, qIdx) => {
+          const key = `${qIdx}_${div}`;
+          const cell = document.getElementById(`cell_${key}`);
+          if (cell) {
+            cell.classList.remove('graded-correct', 'graded-wrong');
+            cell.title = '';
+            const tickBtn = cell.querySelector('.cell-btn.tick');
+            const crossBtn = cell.querySelector('.cell-btn.cross');
+            if (tickBtn) tickBtn.classList.remove('selected');
+            if (crossBtn) crossBtn.classList.remove('selected');
+          }
+          const rowScore = document.getElementById(`row_score_${qIdx}`);
+          if (rowScore) {
+            rowScore.textContent = '—';
+            rowScore.className = 'row-score-cell';
+          }
+        });
+      });
+
+      document.getElementById('resultsPanel').classList.remove('show');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomSet = generateRandomNumbers();
+      renderTable(randomSet, 'random');
+
+      document.getElementById('btnNewSet').addEventListener('click', () => {
+        renderTable(generateRandomNumbers(), 'random');
+      });
+      document.getElementById('btnNewSetBottom').addEventListener('click', () => {
+        renderTable(generateRandomNumbers(), 'random');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.getElementById('btnSampleSet').addEventListener('click', () => {
+        renderTable([...SAMPLE_NUMBERS], 'sample');
+      });
+
+      document.getElementById('btnCheckTop').addEventListener('click', checkAnswers);
+      document.getElementById('btnCheckBottom').addEventListener('click', checkAnswers);
+
+      document.getElementById('btnReset').addEventListener('click', resetSheet);
+      document.getElementById('btnResetBottom').addEventListener('click', resetSheet);
+
+      const btnRules = document.getElementById('btnToggleRules');
+      const rulesGuide = document.getElementById('rulesGuide');
+      btnRules.addEventListener('click', () => {
+        rulesGuide.classList.toggle('active');
+        btnRules.classList.toggle('btn-primary');
+        btnRules.classList.toggle('btn-outline');
+      });
+    });
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'SET_THEME') {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+        document.body.setAttribute('data-theme', e.data.theme);
+      }
+    });
+
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'REQUEST_THEME' }, '*');
+    }
+  </script>
+
+</body>
+</html>

@@ -55,6 +55,18 @@ const SHEETS_DATA = [
     "title": "Level-3 Sheet-9(Without Abacus)"
   },
   {
+    "path": "division/sheet.html",
+    "category_key": "division",
+    "category": "Divisibility Rules",
+    "title": "Divisibility Rules (2, 3, 4, 5)"
+  },
+  {
+    "path": "division/sheet2.html",
+    "category_key": "division",
+    "category": "Divisibility Rules",
+    "title": "Divisibility Rules (6, 7, 8, 9)"
+  },
+  {
     "path": "exactdivision/exactdivision2dby1d/sheet.html",
     "category_key": "exactdivision",
     "category": "Division (Exact)",

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divisibility Rules (÷ 2, 3, 4, 5) | Base2ace Academy</title>
+  <link rel="icon" href="../logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #122C3D;
+      --text-color: #E0E6EB;
+      --surface-color: #1D4057;
+      --border-color: #244C68;
+      --heading-bg: #27AE60;
+      --heading-text: #FFFFFF;
+      --btn-bg: #27AE60;
+      --btn-hover: #219653;
+      --card-bg: #16364D;
+    }
+
+    html[data-theme="light"], body[data-theme="light"] {
+      --bg-color: #F4F6F8;
+      --text-color: #1A252C;
+      --surface-color: #FFFFFF;
+      --border-color: #D5DBDB;
+      --heading-bg: #27AE60;
+      --heading-text: #FFFFFF;
+      --btn-bg: #27AE60;
+      --btn-hover: #219653;
+      --card-bg: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-color);
+      transition: background-color 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    iframe {
+      display: block;
+      border: none;
+      width: 100%;
+    }
+
+    .banner-frame {
+      height: 150px;
+      overflow: hidden;
+    }
+
+    .footer-frame {
+      height: 120px;
+      margin-top: auto;
+      overflow: hidden;
+    }
+
+    .content-wrapper {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sheet-title-banner {
+      padding: 24px 20px 10px;
+      text-align: center;
+    }
+
+    .sheet-title-banner h1 {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #27AE60 0%, #2ECC71 40%, #00BCD4 100%);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    body[data-theme="light"] .sheet-title-banner h1 {
+      background: linear-gradient(135deg, #122C3D 0%, #1D4057 60%, #27AE60 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .sheet-title-banner p {
+      font-size: 15px;
+      color: #8FA0AC;
+      font-weight: 500;
+    }
+
+    body[data-theme="light"] .sheet-title-banner p {
+      color: #627482;
+    }
+
+    /* Worksheet Switcher Tabs */
+    .sheet-nav-tabs {
+      display: inline-flex;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 5px;
+      margin: 15px auto 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-tab-btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 24px;
+      border-radius: 25px;
+      border: none;
+      background: transparent;
+      color: var(--text-color);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .nav-tab-btn:hover {
+      color: #27AE60;
+    }
+
+    .nav-tab-btn.active {
+      background: #27AE60;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+    }
+
+    .section-frame {
+      width: 100%;
+      min-height: 1650px;
+      border: none;
+      overflow: visible;
+      transition: height 0.2s ease;
+    }
+
+    /* Floating Theme Toggle Button */
+    .theme-toggle-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #27AE60;
+      background: rgba(29, 64, 87, 0.85);
+      color: #FFFFFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      background: #27AE60;
+      color: #FFFFFF;
+      box-shadow: 0 6px 22px rgba(39, 174, 96, 0.5);
+    }
+
+    body[data-theme="light"] .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.9);
+      color: #1A252C;
+      border-color: #27AE60;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    body[data-theme="light"] .theme-toggle-btn:hover {
+      background: #27AE60;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <iframe src="../common/banner.html" class="banner-frame" title="Base2ace Header Banner"></iframe>
+
+  <!-- Main Content Area -->
+  <div class="content-wrapper">
+    <div class="sheet-title-banner">
+      <h1 id="pageTitle">Divisibility Rules (÷ 2, 3, 4, 5)</h1>
+      <p>Interactive Divisibility Practice Sheet • Auto-Graded with Marks Recorded</p>
+    </div>
+
+    <!-- Navigation Switcher between 2,3,4,5 and 6,7,8,9 -->
+    <div class="sheet-nav-tabs">
+      <button class="nav-tab-btn active" id="tab2to5" onclick="switchSection('section1.html', this, 'Divisibility Rules (÷ 2, 3, 4, 5)')">
+        <i class="fas fa-layer-group"></i> Divisibility by 2, 3, 4, 5
+      </button>
+      <button class="nav-tab-btn" id="tab6to9" onclick="switchSection('section2.html', this, 'Divisibility Rules (÷ 6, 7, 8, 9)')">
+        <i class="fas fa-layer-group"></i> Divisibility by 6, 7, 8, 9
+      </button>
+    </div>
+
+    <!-- Worksheet Frame -->
+    <iframe id="sectionFrame" src="section1.html" class="section-frame" title="Divisibility Interactive Section"></iframe>
+  </div>
+
+  <!-- Footer -->
+  <iframe src="../common/footer.html" class="footer-frame" title="Base2ace Footer"></iframe>
+
+  <!-- Floating Theme Toggle -->
+  <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light theme" title="Toggle Theme">
+    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </button>
+
+  <script>
+    function switchSection(src, btnElement, title) {
+      const frame = document.getElementById('sectionFrame');
+      frame.src = src;
+      
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      if (title) {
+        document.getElementById('pageTitle').textContent = title;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const sunIcon = toggleBtn.querySelector('.sun-icon');
+      const moonIcon = toggleBtn.querySelector('.moon-icon');
+
+      let theme = 'dark';
+      try {
+        theme = localStorage.getItem('sheet-theme') || 'dark';
+      } catch(e) {}
+      
+      setTheme(theme);
+
+      toggleBtn.addEventListener('click', function() {
+        const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+
+      function setTheme(newTheme) {
+        document.documentElement.setAttribute('data-theme', newTheme);
+        document.body.setAttribute('data-theme', newTheme);
+        try {
+          localStorage.setItem('sheet-theme', newTheme);
+        } catch(e) {}
+
+        if (newTheme === 'dark') {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+        broadcastTheme(newTheme);
+      }
+
+      function broadcastTheme(newTheme) {
+        document.querySelectorAll('iframe').forEach(iframe => {
+          try {
+            if (iframe.contentWindow) {
+              iframe.contentWindow.postMessage({ type: 'SET_THEME', theme: newTheme }, '*');
+            }
+          } catch(e) {}
+        });
+      }
+
+      window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'REQUEST_THEME') {
+          const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+          broadcastTheme(currentTheme);
+        }
+      });
+
+      document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.addEventListener('load', function() {
+          const currentTheme = document.body.getAttribute('data-theme') || 'dark';
+          broadcastTheme(currentTheme);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
